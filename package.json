@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --watch . --exec \"python\" src/token_counter.py",
     "start": "python src/token_counter.py",
-    "bundle": "pyinstaller --noconsole --onefile src/token_counter.py"
+    "bundle": "python -m PyInstaller token_counter.spec"
   },
   "devDependencies": {
     "@types/bun": "latest",

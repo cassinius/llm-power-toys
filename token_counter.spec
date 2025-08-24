@@ -1,12 +1,17 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+from PyInstaller.utils.hooks import collect_data_files, collect_submodules
+
+# tiktoken now stores everything inside compiled submodules
+datas = collect_data_files('tiktoken')
+hiddenimports = collect_submodules('tiktoken_ext')
 
 a = Analysis(
-    ['token_counter.py'],
+    ['src/token_counter.py'],
     pathex=[],
     binaries=[],
-    datas=[],
-    hiddenimports=[],
+    datas=datas,
+    hiddenimports=hiddenimports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

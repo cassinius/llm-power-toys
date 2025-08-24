@@ -6,6 +6,13 @@ from PySide6.QtWidgets import (
 import tiktoken
 
 
+def safe_encoding_for_model(model_name: str):
+    try:
+        return tiktoken.encoding_for_model(model_name)
+    except Exception:
+        return tiktoken.get_encoding("cl100k_base")
+
+
 class TokenCounter(QWidget):
     def __init__(self):
         super().__init__()
@@ -50,7 +57,7 @@ class TokenCounter(QWidget):
         model_name = self.model_combo.currentText()
 
         try:
-            enc = tiktoken.encoding_for_model(model_name)
+            enc = safe_encoding_for_model(model_name)
         except KeyError:
             enc = tiktoken.get_encoding("cl100k_base")
 
